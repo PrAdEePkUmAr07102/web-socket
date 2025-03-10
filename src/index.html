@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h1>Simple Chat App</h1>
+    <ul id="messages"></ul>
+    <input id="messageInput" type="text" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+      const socket = io('http://localhost:3000'); // Connect to WebSocket server
+
+      // Listen for user join and disconnect events
+      socket.on('user-connected', (msg) => {
+        addMessage(msg, 'green');
+      });
+
+      socket.on('user-disconnected', (msg) => {
+        addMessage(msg, 'red');
+      });
+
+      // Listen for messages
+      socket.on('receive-message', (data) => {
+        addMessage(`User ${data.id}: ${data.text}`, 'black');
+      });
+
+      // Function to send messages
+      function sendMessage() {
+        const input = document.getElementById('messageInput');
+        const message = input.value.trim();
+        if (message) {
+          socket.emit('send-message', message);
+          input.value = '';
+        }
+      }
+
+      // Function to display messages
+      function addMessage(text, color) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        li.style.color = color;
+        document.getElementById('messages').appendChild(li);
+      }
+    </script>
+  </body>
+</html>
