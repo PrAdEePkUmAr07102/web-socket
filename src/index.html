@@ -13,7 +13,7 @@
     <button onclick="sendMessage()">Send</button>
 
     <script>
-      const socket = io('wss://pradeep-chat-room.onrender.com'); // Connect to WebSocket server
+      const socket = io('https://pradeep-chat-room.onrender.com'); // Connect to WebSocket server
 
       // Listen for user join and disconnect events
       socket.on('user-connected', (msg) => {
