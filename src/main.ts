@@ -27,6 +27,6 @@ bootstrap();
 //NOW INSTALL npm install socket.io-client
 // NOW CREATE INDEX.HTML AND SET UP A CODE HERE
 // NOW CHECK git add .
-git commit -m "Fixed WebSocket deployment for Render"
-git push origin main
-
+//git add .
+//git commit -m "Fixed WebSocket deployment for Render"
+//git push origin main
